@@ -1,0 +1,51 @@
+{%extends  'amazon/base.html' %}
+{% load static %}
+
+{%block title %}
+
+    Products - list
+{% endblock %}
+
+{% block content %}
+    <link type="text/css" rel="stylesheet" href="{% static 'amazon/css/style.css' %}">
+
+<div style="background-color: burlywood">
+
+
+    <h1> All Products </h1>
+    <div class="container">
+    <div class="row">
+
+    {% for p in products %}
+        <div class="card col-3" style="width: 18rem;">
+      <img src="{% static 'amazon/images/'|add:p.img %}" class="card-img-top"
+           width="200" height="200"
+           alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ p.name }}</h5>
+        <p class="card-text"> {{ p.price }}</p>
+        <a href="{% url 'productDetails' p.id %}" class="btn btn-primary">{{ p.name}} Details</a>
+      </div>
+    </div>
+
+    {% endfor %}
+     </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

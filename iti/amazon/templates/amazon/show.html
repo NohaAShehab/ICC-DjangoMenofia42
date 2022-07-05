@@ -1,0 +1,56 @@
+{%extends  'amazon/base.html' %}
+{% load static %}
+
+{%block title %}
+
+    Products - Details
+{% endblock %}
+
+{% block mainblock %}
+    <link type="text/css" rel="stylesheet" href="{% static 'amazon/css/style.css' %}">
+
+<div style="">
+
+
+    <h1> Product  </h1>
+    <div class="container">
+    <div class="row">
+        <div class="card col-3" >
+      <img src="{% static 'amazon/images/'|add:product.img %}" class="card-img-top"
+           width="200" height="200"/>
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text"> Price:{{ product.price }}</p>
+          <p class="card-text"> Desc: {{ product.desc }}</p>
+          <p class="card-text"> Created_At: {{ product.created_at }}</p>
+          <p class="card-text"> updated_At: {{ product.updated_at }}</p>
+
+          <a href="{{ product.get_delete_url }}" class="btn btn-danger">Delete</a>
+
+
+{#        <a href="{% url 'productsindex' %}" class="btn btn-primary">Back to all products</a>#}
+          <a href="{{ product.get_all_url }}" class="btn btn-primary">Back to all products</a>
+
+
+      </div>
+    </div>
+     </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
