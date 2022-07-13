@@ -35,7 +35,9 @@ class Product(models.Model):
     desc = models.TextField(null=True)
 
     # each product must belong to one category (FK)
-    category = models.ForeignKey(Category, null=True, default=1, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, null=True,
+                default=1, on_delete=models.CASCADE,
+                related_name='cat_products')
 
     def __str__(self):
         return self.name
@@ -48,3 +50,9 @@ class Product(models.Model):
 
     def get_all_url(self):
         return reverse("productsindex")
+
+
+    def get_absolute_url(self):
+        return reverse("productDetails", args=[self.id])
+
+
