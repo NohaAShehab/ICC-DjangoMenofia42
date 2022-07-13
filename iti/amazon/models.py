@@ -21,7 +21,7 @@ class Product(models.Model):
     price = models.IntegerField(default=1000,
                                 validators=[MinValueValidator(200), MaxValueValidator(5000)])
     img = models.CharField(max_length=100)
-
+    image= models.ImageField(upload_to="amazon/products/images/", null=True)
     # track created_at time, update_at time
     created_at = models.DateTimeField(auto_now_add=True)  # created_At, save time stamp --> creation
     updated_at = models.DateTimeField(auto_now=True)  # save time stamp --> update
@@ -55,4 +55,6 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("productDetails", args=[self.id])
 
+    def get_image_url(self):
+        return f"/media/{self.image}"
 

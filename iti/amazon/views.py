@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from amazon.models import Product, Category
 from django.shortcuts import get_object_or_404
+### to upload the file
+from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 
@@ -113,6 +115,15 @@ def createProduct(request):
         p.is_best_selling = False
         if request.POST["is_best_selling"]=="on":
             p.is_best_selling = True
+
+        ######### ----- upload file -------
+        print(request.FILES)  # image object
+        imgobj = request.FILES["image"]
+        imagename= imgobj.name  # image name
+        file_system_storage = FileSystemStorage()
+        file_system_storage.save(f"amazon/products/images/{imagename}",imgobj)
+
+        p.image = f"amazon/products/images/{imagename}"
 
         p.save()
         # return to index --->
