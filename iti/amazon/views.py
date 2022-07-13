@@ -1,7 +1,7 @@
 from http.client import HTTPResponse
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from amazon.models import Product
+from amazon.models import Product, Category
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
@@ -81,3 +81,49 @@ def deleteProduct(request, id):
 
 def editProduct(request, id):
     return HttpResponse(id)
+
+
+
+
+def createProduct(request):
+    # return HttpResponse("Create new product ")
+    print(request)
+    # request method ---> GET ,---> return with the page ,
+    # request method -===> POST ---> add product
+    if request.POST:
+        p = Product()
+        ## get data from the request , save it to the database
+        print(type(request))
+        # print(request.POST["name"])
+        p.name = request.POST["name"]
+        p.desc = request.POST["desc"]
+        p.price = request.POST["price"]
+        p.img = request.POST["img"]
+        # print(request.POST["is_best_selling"], type(request.POST["is_best_selling"]))
+        print(request.POST["category"])
+        ### -------------------------------
+        # there is a relation between category and the product
+
+        # p.category = request.POST["category"]  #- int, I need the category object
+
+        # get the category object by the id ---> cat_id (request.POST["category"])
+        cat = get_object_or_404(Category, pk=request.POST["category"])
+        # p.category  = cat
+        ## -------------------------
+        p.is_best_selling = False
+        if request.POST["is_best_selling"]=="on":
+            p.is_best_selling = True
+
+        p.save()
+        # return to index --->
+        url = p.get_all_url()
+        return HttpResponseRedirect(url)
+
+        # return HttpResponse("Create new product ")
+
+    ## when request method is GET, ===> send categories ---> to the Form
+    cats = Category.objects.all()
+    return render(request, "amazon/createProduct.html", context={"categories":cats})
+
+
+

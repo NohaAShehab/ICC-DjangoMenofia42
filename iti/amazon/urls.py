@@ -4,7 +4,8 @@
 
 
 from django.urls import path
-from amazon.views import homepage, contactus, aboutus, displayproduct, products_index, productDetails,deleteProduct,editProduct
+from amazon.views import homepage, contactus, aboutus, displayproduct, \
+    products_index, productDetails,deleteProduct,editProduct, createProduct
 
 
 urlpatterns = [
@@ -26,5 +27,6 @@ urlpatterns = [
     path("products/<int:id>", productDetails, name="productDetails"),
     path("products/<int:id>/delete", deleteProduct, name="deleteproduct"),
     path("products/<int:id>/edit", editProduct, name="editproduct"),
+    path("products/create", createProduct, name="createproduct")
 
 ]
