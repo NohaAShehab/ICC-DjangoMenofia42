@@ -28,7 +28,8 @@ urlpatterns = [
     # register clients url in the project main 
     # urls file
     
-    path("clients/", include("clients.urls"))
+    path("clients/", include("clients.urls")),
+    path("courses/", include("courses.urls"))
     
     
 

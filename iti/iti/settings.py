@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'clients.apps.ClientsConfig',
-    'amazon.apps.AmazonConfig', 
+    'amazon.apps.AmazonConfig',
+    'courses.apps.CoursesConfig',
 
 ]
 
